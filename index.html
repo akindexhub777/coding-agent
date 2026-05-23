@@ -591,7 +591,7 @@ async function callGemini(apiKey, messages, sys) {
       body: JSON.stringify({
         system_instruction: { parts: [{ text: sys }] },
         contents,
-        generationConfig: { maxOutputTokens: 8192, temperature: 0.7 }
+        generationConfig: { maxOutputTokens: 4096, temperature: 0.7 }
       })
     }
   );
@@ -606,22 +606,34 @@ async function callGemini(apiKey, messages, sys) {
 }
  
 async function callGroq(apiKey, messages, sys) {
+  // Groq free tier limite: ~12000 tokens/min
+  // On garde seulement les 4 derniers messages (2 echanges) et on tronque le system prompt
+  const trimmed = messages.slice(-4).map(m => ({
+    role: m.role,
+    content: m.content.slice(0, 2000) // tronque les longs messages
+  }));
+  const shortSys = sys.slice(0, 800);
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
     body: JSON.stringify({
       model: 'llama-3.3-70b-versatile',
-      messages: [{ role: 'system', content: sys }, ...messages],
-      max_tokens: 8192, temperature: 0.7
+      messages: [{ role: 'system', content: shortSys }, ...trimmed],
+      max_tokens: 3000,
+      temperature: 0.7
     })
   });
   if (!res.ok) {
     const e = await res.json().catch(() => ({}));
-    throw new Error(e.error?.message || 'Groq erreur ' + res.status);
+    const msg = e.error?.message || 'Groq erreur ' + res.status;
+    if (msg.includes('too large') || msg.includes('TPM') || msg.includes('tokens per minute')) {
+      throw new Error('Message trop long pour Groq free. Astuce: commence une nouvelle conversation ou switche sur OpenRouter.');
+    }
+    throw new Error(msg);
   }
   const d = await res.json();
   const t = d.choices?.[0]?.message?.content;
-  if (!t) throw new Error('Groq: réponse vide. Vérifie ta clé API.');
+  if (!t) throw new Error('Groq: reponse vide. Verifie ta cle API.');
   return t;
 }
  
@@ -661,7 +673,7 @@ async function callClaude(apiKey, messages, sys) {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 8192,
+      max_tokens: 4096,
       system: sys,
       messages
     })
@@ -798,4 +810,3 @@ selectProv('gemini');
 </script>
 </body>
 </html>
- 
