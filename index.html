@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -216,11 +216,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
     CODE<span class="logo-accent">XA</span>
   </div>
   <div class="header-right">
-    <div class="badge" id="badgeProv"><div class="dot"></div><span id="badgeProvTxt">Aucun provider</span></div>
+    <div class="badge" id="badgeProv"><div class="dot"></div><span id="badgeProvTxt">No provider</span></div>
     <div class="badge" id="badgeExa"><div class="dot"></div>Exa</div>
-    <div class="badge" id="badgeMem"><div class="dot"></div>Mémoire</div>
+    <div class="badge" id="badgeMem"><div class="dot"></div>Memory</div>
     <div class="badge" id="badgeStream"><div class="dot"></div>Stream</div>
-    <button class="new-chat-btn" onclick="newChat()">+ Nouveau chat</button>
+    <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
   </div>
 </header>
  
@@ -229,7 +229,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
  
   <!-- PROVIDER -->
   <div class="s-sec">
-    <span class="s-lbl">🤖 Modèle IA</span>
+    <span class="s-lbl">🤖 AI Model</span>
     <div class="prov-tabs">
       <button class="prov-tab active" id="tab-gemini" onclick="setProv('gemini')">Gemini</button>
       <button class="prov-tab" id="tab-groq" onclick="setProv('groq')">Groq</button>
@@ -245,13 +245,13 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
     <div class="exa-row" id="exaToggle" onclick="toggleExa()">
       <div class="exa-left">
         <span>🔍</span>
-        <div><div style="font-size:11px;color:var(--text)">Exa Search</div><small>Docs à jour · Web</small></div>
+        <div><div style="font-size:11px;color:var(--text)">Exa Search</div><small>Live docs · Web</small></div>
       </div>
       <div class="sw" id="exaSw"></div>
     </div>
     <div class="exa-key" id="exaKeyWrap">
       <div class="key-row">
-        <label>EXA API KEY <a href="https://dashboard.exa.ai" target="_blank">→ gratuit</a></label>
+        <label>EXA API KEY <a href="https://dashboard.exa.ai" target="_blank">→ free</a></label>
         <input type="password" class="key-inp" id="exaKey" placeholder="exa-..." oninput="saveKeys()" />
       </div>
     </div>
@@ -276,7 +276,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
   <div class="s-sec">
     <span class="s-lbl">🎯 Mode</span>
     <div class="mode-tabs">
-      <button class="mode-tab active" id="mode-generate" onclick="setMode('generate')">Générer</button>
+      <button class="mode-tab active" id="mode-generate" onclick="setMode('generate')">Generate</button>
       <button class="mode-tab" id="mode-review" onclick="setMode('review')">Review</button>
       <button class="mode-tab" id="mode-debug" onclick="setMode('debug')">Debug</button>
       <button class="mode-tab" id="mode-agent" onclick="setMode('agent')">Agent🔄</button>
@@ -285,32 +285,32 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
  
   <!-- MEMORY -->
   <div class="s-sec">
-    <span class="s-lbl">🧠 Mémoire persistante</span>
+    <span class="s-lbl">🧠 Persistent Memory</span>
     <div class="mem-panel" id="memPanel">
-      <div class="mem-empty">Aucun souvenir</div>
+      <div class="mem-empty">No memories yet</div>
     </div>
     <div class="mem-actions">
-      <button class="mem-btn" onclick="addMemoryPrompt()">+ Ajouter</button>
-      <button class="mem-btn" onclick="clearMemory()">🗑 Effacer tout</button>
+      <button class="mem-btn" onclick="addMemoryPrompt()">+ Add</button>
+      <button class="mem-btn" onclick="clearMemory()">🗑 Clear all</button>
     </div>
   </div>
  
   <!-- HISTORY -->
   <div class="s-sec" style="flex:1;overflow:hidden;display:flex;flex-direction:column">
-    <span class="s-lbl">📋 Historique</span>
+    <span class="s-lbl">📋 History</span>
     <div class="hist-list" id="histList">
-      <div class="hist-empty">Aucun historique</div>
+      <div class="hist-empty">No history yet</div>
     </div>
   </div>
  
   <!-- LINKS -->
   <div class="s-sec">
-    <span class="s-lbl">🆓 Clés gratuites</span>
+    <span class="s-lbl">🆓 Free API Keys</span>
     <div style="font-size:9px;color:var(--muted);line-height:2">
-      <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent2);text-decoration:none">→ Gemini (1500 req/jour)</a><br>
-      <a href="https://console.groq.com" target="_blank" style="color:var(--accent2);text-decoration:none">→ Groq (ultra rapide)</a><br>
-      <a href="https://openrouter.ai" target="_blank" style="color:var(--accent2);text-decoration:none">→ OpenRouter (multi-modèles)</a><br>
-      <a href="https://dashboard.exa.ai" target="_blank" style="color:var(--accent2);text-decoration:none">→ Exa Search (1000/mois)</a>
+      <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent2);text-decoration:none">→ Gemini (1500 req/day)</a><br>
+      <a href="https://console.groq.com" target="_blank" style="color:var(--accent2);text-decoration:none">→ Groq (ultra fast)</a><br>
+      <a href="https://openrouter.ai" target="_blank" style="color:var(--accent2);text-decoration:none">→ OpenRouter (multi-models)</a><br>
+      <a href="https://dashboard.exa.ai" target="_blank" style="color:var(--accent2);text-decoration:none">→ Exa Search (1000/month)</a>
     </div>
   </div>
  
@@ -322,26 +322,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
     <div class="welcome" id="welcomeScreen">
       <div class="welcome-icon">⚡</div>
       <h2>Coding Agent <em>v2.0</em></h2>
-      <p>Agent IA full-stack avec streaming, mémoire persistante, upload de fichiers et mode agent multi-étapes.</p>
+      <p>Full-stack AI agent with streaming, persistent memory, file upload and multi-step agent mode.</p>
       <div class="features">
         <span class="feat active">⚡ Streaming</span>
-        <span class="feat active">🧠 Mémoire</span>
-        <span class="feat active">📂 Upload fichiers</span>
-        <span class="feat active">🔄 Agent loop</span>
+        <span class="feat active">🧠 Memory</span>
+        <span class="feat active">📂 File Upload</span>
+        <span class="feat active">🔄 Agent Loop</span>
         <span class="feat active">🔍 Exa Search</span>
       </div>
       <div class="suggestions">
         <div class="sug" onclick="fillSug(this.querySelector('.st').textContent)">
-          <span class="si">🌐</span><div class="st">Site Web3 avec wallet connect et animations</div>
+          <span class="si">🌐</span><div class="st">Web3 site with wallet connect and animations</div>
         </div>
         <div class="sug" onclick="fillSug(this.querySelector('.st').textContent)">
-          <span class="si">⛓️</span><div class="st">Smart contract ERC-20 avec staking et rewards</div>
+          <span class="si">⛓️</span><div class="st">ERC-20 smart contract with staking and rewards</div>
         </div>
         <div class="sug" onclick="fillSug(this.querySelector('.st').textContent)">
-          <span class="si">🐍</span><div class="st">API Python FastAPI avec auth JWT et base de données</div>
+          <span class="si">🐍</span><div class="st">Python FastAPI with JWT auth and database</div>
         </div>
         <div class="sug" onclick="fillSug(this.querySelector('.st').textContent)">
-          <span class="si">⚡</span><div class="st">Dashboard React avec graphiques et thème sombre</div>
+          <span class="si">⚡</span><div class="st">React dashboard with charts and dark theme</div>
         </div>
       </div>
     </div>
@@ -349,18 +349,18 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
  
   <div class="input-area">
     <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-      📂 Glisse un fichier ici ou clique pour uploader (.js .py .sol .html .css .json .txt)
+      📂 Drop a file here or click to upload (.js .py .sol .html .css .json .txt)
     </div>
     <div class="attached-files" id="attachedFiles"></div>
     <div class="input-row">
       <div class="input-wrap">
-        <textarea id="userInput" placeholder="Décris ce que tu veux construire..." rows="1"
+        <textarea id="userInput" placeholder="Describe what you want to build..." rows="1"
           onkeydown="handleKey(event)" oninput="onInput(this)"
           ondragover="showDrop(event)" ondragleave="hideDrop()" ondrop="handleDrop(event)"></textarea>
         <div class="input-meta">
           <div class="input-tags">
             <span class="active-prov" id="activeProvTag">Provider →</span>
-            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📎 Fichier</button>
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📎 File</button>
           </div>
           <span style="font-size:9px;color:var(--muted)" id="charCount">0</span>
         </div>
@@ -368,7 +368,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
       <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
     </div>
     <input type="file" id="fileInput" style="display:none" accept=".js,.jsx,.ts,.tsx,.py,.sol,.html,.css,.json,.txt,.md,.rs,.go,.java,.cpp,.c" onchange="handleFileInput(event)" multiple />
-    <div class="input-hint"><kbd>Enter</kbd> envoyer &nbsp;·&nbsp; <kbd>Shift+Enter</kbd> nouvelle ligne</div>
+    <div class="input-hint"><kbd>Enter</kbd> send &nbsp;·&nbsp; <kbd>Shift+Enter</kbd> new line</div>
   </div>
 </div>
 </div>
@@ -428,7 +428,7 @@ const PROVS = {
 };
  
 // ════════════════════════════════════════════
-// LOCALSTORAGE — Mémoire persistante
+// LOCALSTORAGE — Persistent Memory
 // ════════════════════════════════════════════
 function loadMemory() {
   try { S.memory = JSON.parse(localStorage.getItem('codexa_memory') || '[]'); } catch(e) { S.memory = []; }
@@ -453,21 +453,21 @@ function delMemory(id) {
 }
  
 function clearMemory() {
-  if (!confirm('Effacer toute la mémoire ?')) return;
+  if (!confirm('Clear all memory?')) return;
   S.memory = [];
   saveMemory();
-  notify('Mémoire effacée', 'warn');
+  notify('Memory cleared', 'warn');
 }
  
 function addMemoryPrompt() {
-  const t = prompt('Que dois-je retenir ? (ex: "Je code en Python", "Mon projet est GenLayer")');
-  if (t) { addMemory(t); notify('Mémorisé ✓'); }
+  const t = prompt('What should I remember? (e.g. "I code in Python", "My project is GenLayer")');
+  if (t) { addMemory(t); notify('Saved to memory ✓'); }
 }
  
 function renderMemory() {
   const panel = document.getElementById('memPanel');
   if (S.memory.length === 0) {
-    panel.innerHTML = '<div class="mem-empty">Aucun souvenir</div>';
+    panel.innerHTML = '<div class="mem-empty">No memories yet</div>';
     return;
   }
   panel.innerHTML = S.memory.map(m => `
@@ -480,9 +480,9 @@ function renderMemory() {
 // Auto-extract memory from conversation
 function autoExtractMemory(userMsg) {
   const triggers = [
-    { r: /je (suis|travaille|code|utilise|préfère)/i, prefix: 'Utilisateur: ' },
-    { r: /mon (projet|stack|site|app|contrat)/i, prefix: 'Projet: ' },
-    { r: /remember|retiens|mémorise/i, prefix: '' },
+    { r: /i (am|work|code|use|prefer)/i, prefix: 'User: ' },
+    { r: /my (project|stack|site|app|contract)/i, prefix: 'Project: ' },
+    { r: /remember|save this|memorize/i, prefix: '' },
   ];
   for (const t of triggers) {
     if (t.r.test(userMsg) && userMsg.length < 200) {
@@ -525,7 +525,7 @@ function setProv(p) {
   const pv = PROVS[p];
   document.getElementById('keySection').innerHTML = `
     <div class="key-row">
-      <label>${pv.label} <a href="${pv.link}" target="_blank">→ ${pv.free?'gratuit':'payant'}</a></label>
+      <label>${pv.label} <a href="${pv.link}" target="_blank">→ ${pv.free?'free':'paid'}</a></label>
       <input type="password" class="key-inp" id="provKey" placeholder="${pv.ph}" oninput="saveKeys()" />
     </div>`;
   document.getElementById('activeProvTag').textContent = pv.name;
@@ -587,7 +587,7 @@ function notify(msg, type = 'ok') {
 }
  
 function now() {
-  return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 }
  
 function esc(s) {
@@ -595,7 +595,7 @@ function esc(s) {
 }
  
 function newChat() {
-  if (S.history.length > 0 && !confirm('Effacer la conversation actuelle ?')) return;
+  if (S.history.length > 0 && !confirm('Clear current conversation?')) return;
   S.history = [];
   S.attachedFiles = [];
   document.getElementById('attachedFiles').innerHTML = '';
@@ -603,9 +603,9 @@ function newChat() {
   // Restore welcome
   const w = document.createElement('div');
   w.className = 'welcome'; w.id = 'welcomeScreen';
-  w.innerHTML = `<div class="welcome-icon">⚡</div><h2>Nouveau chat</h2><p>Nouvelle conversation — la mémoire est conservée.</p>`;
+  w.innerHTML = `<div class="welcome-icon">⚡</div><h2>New Chat</h2><p>New conversation — memory is preserved.</p>`;
   document.getElementById('chatArea').appendChild(w);
-  notify('Nouveau chat ✓');
+  notify('New chat started ✓');
 }
  
 // ════════════════════════════════════════════
@@ -627,12 +627,12 @@ function handleFileInput(e) {
  
 function processFile(file) {
   const maxSize = 100 * 1024; // 100KB max
-  if (file.size > maxSize) { notify('Fichier trop grand (max 100KB)', 'err'); return; }
+  if (file.size > maxSize) { notify('File too large (max 100KB)', 'err'); return; }
   const reader = new FileReader();
   reader.onload = (e) => {
     S.attachedFiles.push({ name: file.name, content: e.target.result, size: file.size });
     renderAttached();
-    notify(`📎 ${file.name} ajouté`);
+    notify(`📎 ${file.name} attached`);
   };
   reader.readAsText(file);
 }
@@ -771,8 +771,8 @@ function copyBlock(id) {
   const el = document.getElementById(id);
   if (!el) return;
   navigator.clipboard.writeText(el.textContent)
-    .then(() => notify('Copié ✓'))
-    .catch(() => { notify('Impossible de copier','err'); });
+    .then(() => notify('Copied ✓'))
+    .catch(() => { notify('Could not copy','err'); });
 }
  
 function addToHistory(text) {
@@ -802,8 +802,8 @@ async function streamGroq(apiKey, messages, sys, bodyId) {
   });
   if (!res.ok) {
     const e = await res.json().catch(()=>({}));
-    const msg = e.error?.message || 'Groq erreur ' + res.status;
-    if (msg.includes('too large')||msg.includes('TPM')) throw new Error('Message trop long. Commence un nouveau chat ou utilise OpenRouter.');
+    const msg = e.error?.message || 'Groq error ' + res.status;
+    if (msg.includes('too large')||msg.includes('TPM')) throw new Error('Message too long. Start a new chat or switch to OpenRouter.');
     throw new Error(msg);
   }
   return streamSSE(res.body, bodyId, d => d.choices?.[0]?.delta?.content || '');
@@ -828,7 +828,7 @@ async function streamGemini(apiKey, messages, sys, bodyId) {
   );
   if (!res.ok) {
     const e = await res.json().catch(()=>({}));
-    throw new Error(e.error?.message || 'Gemini erreur ' + res.status);
+    throw new Error(e.error?.message || 'Gemini error ' + res.status);
   }
   return streamSSE(res.body, bodyId, d => d.candidates?.[0]?.content?.parts?.[0]?.text || '');
 }
@@ -850,7 +850,7 @@ async function streamOpenRouter(apiKey, messages, sys, bodyId) {
   });
   if (!res.ok) {
     const e = await res.json().catch(()=>({}));
-    throw new Error(e.error?.message || 'OpenRouter erreur ' + res.status);
+    throw new Error(e.error?.message || 'OpenRouter error ' + res.status);
   }
   return streamSSE(res.body, bodyId, d => d.choices?.[0]?.delta?.content || '');
 }
@@ -873,7 +873,7 @@ async function callClaudeNonStream(apiKey, messages, sys) {
   });
   if (!res.ok) {
     const e = await res.json().catch(()=>({}));
-    throw new Error(e.error?.message || 'Claude erreur ' + res.status);
+    throw new Error(e.error?.message || 'Claude error ' + res.status);
   }
   const d = await res.json();
   return d.content?.map(c=>c.text||'').join('') || '';
@@ -961,7 +961,7 @@ async function callExa(query) {
 // AGENT LOOP (mode agent)
 // ════════════════════════════════════════════
 async function runAgentLoop(userMsg, provKey, sys, bodyId) {
-  const steps = ['🧠 Planifier', '🔍 Rechercher', '⚡ Coder', '✅ Vérifier'];
+  const steps = ['🧠 Plan', '🔍 Search', '⚡ Code', '✅ Verify'];
   addSteps(steps);
  
   // Step 0: Plan
@@ -1007,33 +1007,33 @@ function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 // ════════════════════════════════════════════
 function buildSysPrompt(userMsg) {
   const modeMap = {
-    generate: 'Tu es un expert coding agent. Génère du code complet, propre, commenté et production-ready.',
-    review:   'Tu es un expert code reviewer. Analyse le code, identifie les bugs et propose des améliorations précises.',
-    debug:    'Tu es un expert debugger. Trouve et corrige les bugs avec des explications claires en français.',
-    agent:    'Tu es un agent autonome expert. Planifie, code, vérifie — génère du code complet et structuré.'
+    generate: 'You are an expert coding agent. Generate complete, clean, commented, production-ready code.',
+    review:   'You are an expert code reviewer. Analyze the code, identify bugs and suggest precise improvements.',
+    debug:    'You are an expert debugger. Find and fix bugs with clear explanations.',
+    agent:    'You are an expert autonomous agent. Plan, code, verify — generate complete, structured code.'
   };
  
   // Memory context
   const memCtx = S.memory.length > 0
-    ? '\n\n[MÉMOIRE — ce que tu sais de l\'utilisateur]\n' + S.memory.map(m=>m.text).join('\n')
+    ? '\n\n[MEMORY — what you know about the user]\n' + S.memory.map(m=>m.text).join('\n')
     : '';
  
   // Files context
   const filesCtx = S.attachedFiles.length > 0
-    ? '\n\n[FICHIERS UPLOADÉS]\n' + S.attachedFiles.map(f=>`\`\`\`${f.name}\n${f.content.slice(0,3000)}\n\`\`\``).join('\n\n')
+    ? '\n\n[UPLOADED FILES]\n' + S.attachedFiles.map(f=>`\`\`\`${f.name}\n${f.content.slice(0,3000)}\n\`\`\``).join('\n\n')
     : '';
  
   return `${modeMap[S.mode]}
  
 Stack: ${S.stack}
 Règles:
-- Réponds TOUJOURS en français
-- Code complet et fonctionnel, pas de pseudocode ni "à compléter"
-- Utilise les meilleures pratiques 2024/2025
-- Structure: explication courte → code complet → instructions de déploiement
-- Blocs \`\`\`langage pour TOUT le code, avec nom du fichier en commentaire
-- Si plusieurs fichiers, indique clairement chaque fichier
-- Commente le code important en français
+- ALWAYS reply in English
+- Complete and functional code, no pseudocode or placeholders
+- Use 2024/2025 best practices
+- Structure: short explanation → complete code → deployment instructions
+- Use \`\`\`language blocks for ALL code, with filename in comment
+- If multiple files, clearly label each one
+- Comment important code in English
 ${memCtx}${filesCtx}`;
 }
  
@@ -1047,7 +1047,7 @@ async function sendMessage() {
   if (!text) return;
  
   const provKey = document.getElementById('provKey')?.value.trim();
-  if (!provKey) { notify('Choisis un provider et entre ta clé API !', 'err'); return; }
+  if (!provKey) { notify('Select a provider and enter your API key!', 'err'); return; }
  
   S.loading = true;
   document.getElementById('sendBtn').disabled = true;
@@ -1060,7 +1060,7 @@ async function sendMessage() {
   // Build user message with files
   let fullUserMsg = text;
   if (S.attachedFiles.length > 0) {
-    fullUserMsg += '\n\n[Fichiers joints: ' + S.attachedFiles.map(f=>f.name).join(', ') + ']';
+    fullUserMsg += '\n\n[Attached files: ' + S.attachedFiles.map(f=>f.name).join(', ') + ']';
   }
  
   addUserMsg(text);
@@ -1104,16 +1104,16 @@ async function sendMessage() {
     S.attachedFiles = [];
     renderAttached();
  
-    notify('Généré ✓ — ' + PROVS[S.prov].name);
+    notify('Generated ✓ — ' + PROVS[S.prov].name);
     updateBadges();
  
   } catch(err) {
     const el = document.getElementById(bodyId);
     let hint = '';
-    if (err.message.includes('401')||err.message.includes('API key')||err.message.includes('invalid')) hint = ' → Vérifie ta clé API';
-    if (err.message.includes('429')||err.message.includes('rate')||err.message.includes('quota')) hint = ' → Limite atteinte, attends 1 min ou change de provider';
-    if (err.message.includes('403')) hint = ' → Clé API invalide ou expirée';
-    if (err.message.includes('Failed to fetch')||err.message.includes('CORS')) hint = ' → Problème réseau';
+    if (err.message.includes('401')||err.message.includes('API key')||err.message.includes('invalid')) hint = ' → Check your API key';
+    if (err.message.includes('429')||err.message.includes('rate')||err.message.includes('quota')) hint = ' → Rate limit reached, wait 1 min or switch provider';
+    if (err.message.includes('403')) hint = ' → Invalid or expired API key';
+    if (err.message.includes('Failed to fetch')||err.message.includes('CORS')) hint = ' → Network error';
     if (el) el.innerHTML = `<span style="color:var(--accent3)">❌ ${esc(err.message)}${esc(hint)}</span>`;
     notify(err.message, 'err');
     removeSteps();
