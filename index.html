@@ -184,6 +184,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .notif.err{background:rgba(255,60,110,.12);border:1px solid var(--accent3);color:var(--accent3)}
 .notif.warn{background:rgba(255,215,0,.1);border:1px solid var(--gold);color:var(--gold)}
 @media(max-width:768px){.main{grid-template-columns:1fr}.sidebar{display:none}}
+ 
+/* DONATION BANNER */
+.donate-banner{background:linear-gradient(135deg,rgba(0,255,136,.06) 0%,rgba(13,157,255,.06) 50%,rgba(255,60,110,.06) 100%);border-top:1px solid rgba(0,255,136,.15);border-bottom:1px solid rgba(0,255,136,.15);padding:18px 24px;text-align:center;flex-shrink:0}
+.donate-banner h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-0.3px}
+.donate-banner h3 em{color:var(--accent);font-style:normal}
+.donate-banner p{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7}
+.wallets{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.wallet-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:280px;max-width:380px;text-align:left;transition:all .2s;cursor:pointer;flex:1}
+.wallet-card:hover{border-color:var(--accent);box-shadow:0 0 16px rgba(0,255,136,.1)}
+.wallet-card.btc:hover{border-color:var(--gold);box-shadow:0 0 16px rgba(255,215,0,.1)}
+.wc-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.wc-icon{font-size:20px}
+.wc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px}
+.wc-chain{font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2);color:var(--accent)}
+.wallet-card.btc .wc-chain{background:rgba(255,215,0,.1);border-color:rgba(255,215,0,.2);color:var(--gold)}
+.wc-addr{font-size:9px;color:var(--muted);word-break:break-all;line-height:1.6;background:var(--code-bg);padding:6px 8px;border-radius:5px;border:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+.wc-addr span{flex:1}
+.wc-copy{cursor:pointer;font-size:12px;flex-shrink:0;transition:transform .15s;padding:1px 4px;border-radius:3px;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.15);color:var(--accent)}
+.wc-copy:hover{transform:scale(1.2)}
+.donate-note{font-size:9px;color:var(--muted);margin-top:10px;opacity:.7}
 </style>
 </head>
 <body>
@@ -351,6 +371,37 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
     <div class="input-hint"><kbd>Enter</kbd> envoyer &nbsp;·&nbsp; <kbd>Shift+Enter</kbd> nouvelle ligne</div>
   </div>
 </div>
+</div>
+ 
+<!-- DONATION BANNER -->
+<div class="donate-banner" id="donateBanner">
+  <h3>💚 If you enjoy <em>CODEXA</em>, consider supporting the creator</h3>
+  <p>Built with ❤️ — 100% free, no ads, no tracking. Every contribution keeps this project alive.</p>
+  <div class="wallets">
+    <div class="wallet-card" onclick="copyWallet('eth')">
+      <div class="wc-top">
+        <span class="wc-icon">⟠</span>
+        <span class="wc-name">Ethereum</span>
+        <span class="wc-chain">ETH / ERC-20</span>
+      </div>
+      <div class="wc-addr">
+        <span id="ethAddr">0x4fD59C85BF2390ecaD950084B4c654dBbe9a0D9d</span>
+        <span class="wc-copy" id="ethCopy" title="Copy">📋</span>
+      </div>
+    </div>
+    <div class="wallet-card btc" onclick="copyWallet('btc')">
+      <div class="wc-top">
+        <span class="wc-icon">₿</span>
+        <span class="wc-name">Bitcoin</span>
+        <span class="wc-chain">BTC / Native SegWit</span>
+      </div>
+      <div class="wc-addr">
+        <span id="btcAddr">bc1q8j4vspadtvwu83wc7sxkypv2h8luh9wkackf4p</span>
+        <span class="wc-copy" id="btcCopy" title="Copy">📋</span>
+      </div>
+    </div>
+  </div>
+  <div class="donate-note">⚡ Click any wallet to copy the address · Thank you for your support 🙏</div>
 </div>
 </div>
  
@@ -871,19 +922,39 @@ async function callExa(query) {
   const exaKey = document.getElementById('exaKey')?.value.trim();
   if (!exaKey) return null;
   try {
+    // Using Exa Search API v2 — type:auto + highlights (10x token efficient)
     const res = await fetch('https://api.exa.ai/search', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': exaKey },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': exaKey
+      },
       body: JSON.stringify({
-        query: query + ' ' + S.stack + ' code tutorial 2024 2025',
-        numResults: 4, useAutoprompt: true, type: 'neural',
-        contents: { text: { maxCharacters: 500 } }
+        query: query + ' ' + S.stack + ' code documentation 2025',
+        type: 'auto',          // auto selects best search type
+        numResults: 4,
+        contents: {
+          highlights: true,    // 10x token efficient — only relevant tokens
+          highlights: { numSentences: 3, highlightsPerUrl: 2 }
+        }
       })
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const e = await res.json().catch(()=>({}));
+      console.warn('Exa error:', e.error?.message || res.status);
+      return null;
+    }
     const d = await res.json();
-    return d.results || null;
-  } catch(e) { return null; }
+    // Map highlights into result text for context
+    const results = (d.results || []).map(r => ({
+      ...r,
+      text: r.highlights ? r.highlights.join(' ... ') : (r.text || '')
+    }));
+    return results.length > 0 ? results : null;
+  } catch(e) {
+    console.warn('Exa fetch error:', e);
+    return null;
+  }
 }
  
 // ════════════════════════════════════════════
@@ -1052,6 +1123,20 @@ async function sendMessage() {
   document.getElementById('sendBtn').disabled = false;
 }
  
+ 
+function copyWallet(type) {
+  const addr = type === 'eth'
+    ? '0x4fD59C85BF2390ecaD950084B4c654dBbe9a0D9d'
+    : 'bc1q8j4vspadtvwu83wc7sxkypv2h8luh9wkackf4p';
+  const copyEl = document.getElementById(type + 'Copy');
+  navigator.clipboard.writeText(addr).then(() => {
+    notify('✅ ' + (type==='eth'?'ETH':'BTC') + ' address copied!', 'ok');
+    if (copyEl) { copyEl.textContent = '✅'; setTimeout(()=>{ copyEl.textContent='📋'; }, 2000); }
+  }).catch(() => {
+    notify('Address: ' + addr, 'warn');
+  });
+}
+ 
 // ════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════
@@ -1066,4 +1151,3 @@ document.addEventListener('keydown', e => {
 </script>
 </body>
 </html>
- 
